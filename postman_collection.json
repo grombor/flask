@@ -7,12 +7,22 @@
 	},
 	"item": [
 		{
-			"name": "/items",
+			"name": "/login",
 			"request": {
-				"method": "GET",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"1234a\"\r\n}"
+				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/items",
+					"raw": "http://127.0.0.1:5000/login",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -22,7 +32,7 @@
 					],
 					"port": "5000",
 					"path": [
-						"items"
+						"login"
 					]
 				}
 			},
@@ -31,29 +41,16 @@
 		{
 			"name": "/item/<name>",
 			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:5000/item/test",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"item",
-						"test"
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/item/<name>",
-			"request": {
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -85,8 +82,83 @@
 			"response": []
 		},
 		{
+			"name": "/items",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/items",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "/item/<name>",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/item/test",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"item",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/item/<name>",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [
 					{
@@ -97,7 +169,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"price\": 999.99\r\n}"
+					"raw": "{\r\n    \"price\": 9999.99\r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/item/car",
@@ -120,6 +192,16 @@
 		{
 			"name": "/item/<name>",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [
 					{
@@ -134,7 +216,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/item/piano",
+					"raw": "http://127.0.0.1:5000/item/car",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -145,12 +227,39 @@
 					"port": "5000",
 					"path": [
 						"item",
-						"piano"
+						"car"
 					]
 				},
 				"description": "Delete item by name"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1ODIwMjgyMiwianRpIjoiY2NjZWRkN2YtOThlMi00M2YzLTg0OTctZjZiNTU2ZjQ3OWMwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNjU4MjAyODIyLCJleHAiOjE2NTgyMDM3MjJ9.u5I9qrm1iX-iyBR8w4K5nwpLqsDxrbFYYQLXUZrheWs",
+			"type": "string"
 		}
 	]
 }
